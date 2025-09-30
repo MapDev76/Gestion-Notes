@@ -20,5 +20,12 @@ function updateNote($pdo, $id, $title, $content) {
     $stmt->execute([htmlspecialchars($title), htmlspecialchars($content), $id]);
 }
 
+function searchNotes($pdo, $search, $field)
+{
+    $stmt = $pdo->prepare("SELECT * FROM notes WHERE $field LIKE ? ORDER BY created_at DESC");
+    $stmt->execute(['%' . $search . '%']);
+    return $stmt->fetchAll();
+}
+
 
 

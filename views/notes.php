@@ -1,21 +1,20 @@
-<form method="get" action="index.php">
-    <input type="text" name="search" placeholder="Rechercher...">
+<!-- notes.php -->
+<form method="get" action="index.php?route=notes.search">
+    <input type="text" name="search" placeholder="Rechercher..." value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
     <label for="field">Titre</label>
-    <input type="radio" name="field" value="title" />
+    <input type="radio" name="field" value="title" <?= isset($_GET['field']) && $_GET['field'] === 'title' ? 'checked' : '' ?> />
     <label for="field">Contenu</label>
-    <input type="radio" name="field" value="content" />
+    <input type="radio" name="field" value="content" <?= isset($_GET['field']) && $_GET['field'] === 'content' ? 'checked' : '' ?> />
     <button type="submit">Rechercher</button>
 </form>
 
+<h2>Mes notes</h2>
+<a href="index.php?route=notes.create">+ Ajouter une note</a>
 <ul>
     <?php foreach ($notes as $note): ?>
         <li>
-            <strong><?= htmlspecialchars($note['title']) ?></strong>
-            <p>
-            <div class="rendered" data-md="<?= htmlspecialchars($note['content'], ENT_QUOTES) ?>"></div>
-            </p>
-            <small><?= $note['created_at'] ?></small>
-            <a href="index.php?delete=<?= $note['id'] ?>">❌ Supprimer</a>
+            <b><?= htmlspecialchars($note['title']) ?></b> - <span class="rendered" data-md="<?= htmlspecialchars($note['content']) ?>"></span>
+            <a href="index.php?route=notes.delete&id=<?= $note['id'] ?>">❌</a>
         </li>
     <?php endforeach; ?>
 </ul>

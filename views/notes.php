@@ -9,27 +9,22 @@
 
 <ul>
     <?php foreach ($notes as $note): ?>
-    <li>
-        <strong><?= htmlspecialchars($note['title']) ?></strong>
-        <p>
-	<div id="rendered"></div>
-	<script>
-	    // `contentFromDB` = variable PHP échappée en JSON
-	    var raw = <?= json_encode($note['content'] ?? "") ?>;
-	    var html = marked.parse(raw);
-	    document.getElementById('rendered').innerHTML = DOMPurify.sanitize(html);
-	</script>
-</p>
-        <small><?= $note['created_at'] ?></small>
-        <a href="index.php?delete=<?= $note['id'] ?>">❌ Supprimer</a>
-    </li>
+        <li>
+            <strong><?= htmlspecialchars($note['title']) ?></strong>
+            <p>
+            <div class="rendered" data-md="<?= htmlspecialchars($note['content'], ENT_QUOTES) ?>"></div>
+            </p>
+            <small><?= $note['created_at'] ?></small>
+            <a href="index.php?delete=<?= $note['id'] ?>">❌ Supprimer</a>
+        </li>
     <?php endforeach; ?>
 </ul>
 
 <script>
-document.querySelectorAll('.rendered').forEach(el => {
-    const raw = el.dataset.md; // récupère le contenu Markdown
-    const html = marked.parse(raw); // convertit en HTML
-    el.innerHTML = DOMPurify.sanitize(html); // sécurise le HTML
-});
+    document.querySelectorAll('.rendered').forEach(el => {
+        const raw = el.dataset.md; // récupère le contenu Markdown
+        const html = marked.parse(raw); // convertit en HTML
+        el.innerHTML = DOMPurify.sanitize(html); // sécurise le HTML
+    });
 </script>
+</body>

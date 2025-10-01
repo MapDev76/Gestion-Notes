@@ -34,8 +34,11 @@ function deleteNote()
     header("Location: index.php?route=notes.index");
 }
 
-function searchNotes($search, $field)
-{
-    global $pdo;
-    return findNotesBySearch($pdo, $search, $field); // Usa la funzione del model
+function searchNotes() {
+    $search = $_GET['search'] ?? '';
+    $field = $_GET['field'] ?? null;
+    $notes = findNotesBySearch($search, $field);
+    include 'views/header.php';
+    include 'views/notes_list.php';
+    include 'views/footer.php';
 }

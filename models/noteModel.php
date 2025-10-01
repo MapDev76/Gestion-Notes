@@ -19,18 +19,24 @@ function deleteNoteById($id) {
 }
 
 
-function findNotesBySearch($pdo, $search, $field = null)
-{
+function findNotesBySearch($search, $field = null) {
+    global $pdo;
+    $query = "SELECT * FROM notes WHERE ";
+    $params = [];
+
     if ($field === 'title') {
-        $stmt = $pdo->prepare("SELECT * FROM notes WHERE title LIKE ? ORDER BY created_at DESC");
-        $stmt->execute(['%' . $search . '%']);
+        $query .= "title LIKE ? ORDER BY created_at DESC";
+        $params = ["%{$search}%"];
     } elseif ($field === 'content') {
-        $stmt = $pdo->prepare("SELECT * FROM notes WHERE content LIKE ? ORDER BY created_at DESC");
-        $stmt->execute(['%' . $search . '%']);
+        $query .= "content LIKE ? ORDER BY created_at DESC";
+        $params = ["%{$search}%"];
     } else {
-        $stmt = $pdo->prepare("SELECT * FROM notes WHERE title LIKE ? OR content LIKE ? ORDER BY created_at DESC");
-        $stmt->execute(['%' . $search . '%', '%' . $search . '%']);
+        $query .= "(title LIKE ? OR content LIKE ?) ORDER BY created_at DESC";
+        $params = ["%{$search}%", "%{$search}%"];
     }
+
+    $stmt = $pdo->prepare($query);
+    $stmt->execute($params);
     return $stmt->fetchAll();
 }
 

@@ -161,3 +161,50 @@ footer {
     border-radius: 4px;
     font-size: 16px;
 }
+
+/* Barre de recherche */
+form[style*="margin-bottom"] {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+form[style*="margin-bottom"] input[type="text"] {
+    flex: 1;
+    padding: 8px;
+}
+
+form[style*="margin-bottom"] button {
+    padding: 8px 15px;
+}
+
+/* Liste des notes */
+ul li {
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+ul li a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Bouton de retour */
+a[href*="route=notes.index"] {
+    display: inline-block;
+    margin-top: 10px;
+    color: #3498db;
+    text-decoration: none;
+}
+
+a[href*="route=notes.index"]:hover {
+    text-decoration: underline;
+}

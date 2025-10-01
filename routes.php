@@ -1,12 +1,8 @@
 <?php
 require 'controllers/noteController.php';
-$route = $_GET['route'] ?? 'home';
+$route = $_GET['route'] ?? 'notes.index';
 switch ($route) {
-    case 'home':
-        include 'views/header.php';
-        include 'views/form.php';
-        include 'views/footer.php';
-        break;
+
     case 'notes.index':
         $notes = getNotes();
         include 'views/header.php';

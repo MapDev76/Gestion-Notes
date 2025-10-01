@@ -4,7 +4,7 @@
     <textarea id="content" name="content" placeholder="Contenu"></textarea>
     <button type="submit">Ajouter</button>
 </form>
-<a href="index.php?route=notes.index">Voir mes notes</a>
+<a href="index.php?route=notes.index">Retour au mes notes</a>
 <script>
     const mde = new SimpleMDE({
         element: document.getElementById("content"),

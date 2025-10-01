@@ -12,12 +12,15 @@
 </head>
 
 <body>
-    <h1>Gestionnaire de notes</h1>
-    <!-- Barre de recherche  -->
-    <form method="get" action="index.php" style="margin-bottom: 20px;">
-        <input type="text" name="search" placeholder="Rechercher..." value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
-        <label><input type="radio" name="field" value="title" <?= (isset($_GET['field']) && $_GET['field'] === 'title') ? 'checked' : '' ?>> Titre</label>
-        <label><input type="radio" name="field" value="content" <?= (isset($_GET['field']) && $_GET['field'] === 'content') ? 'checked' : '' ?>> Contenu</label>
-        <button type="submit">Rechercher</button>
-    </form>
-    <hr>
+    <header>
+        <h1>Gestionnaire de notes</h1>
+        <!-- Barre de recherche  -->
+        <form method="get" action="index.php" style="margin-bottom: 20px;">
+            <input type="text" name="search" placeholder="Rechercher..." value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
+            <label><input type="radio" name="field" value="title" <?= (isset($_GET['field']) && $_GET['field'] === 'title') ? 'checked' : '' ?>> Titre</label>
+            <label><input type="radio" name="field" value="content" <?= (isset($_GET['field']) && $_GET['field'] === 'content') ? 'checked' : '' ?>> Contenu</label>
+            <button type="submit">Rechercher</button>
+        </form>
+        <hr>
+    </header>
+    <main>
